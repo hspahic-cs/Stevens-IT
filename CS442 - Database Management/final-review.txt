@@ -1,0 +1,39 @@
+Class:
+
+As mentioned, the final exam will be next Tue (12/13/2022) during the normal lecture hours (between 11 AM and 12:15 PM ET).
+
+The exam will be comprehensive and will cover all of the chapters (Ch. 1, 6, 2, 3, 4 and 7) as well as the types of SQL queries we covered in the homework assignments. The exam will have around 5 questions, and the format and types of questions will be similar to those on the midterm exam.
+
+KEY: X = studied
+
+O Standard SQL queries (for these types of queries, you're only allowed to use standard SQL syntax covered in class, and 5 standard aggregate functions, i.e., sum(), count(), avg(), max(), min()).
+O Relational Expressions.
+O Given an SQL query, convert it to a relational expression, and vice versa.
+X. Given an SQL query in one format, convert it to a different format (e.g., Nested Sub-Query to non-Nested Sub-Query, etc.).
+*. Questions about key concepts – as was the case on the midterm exam, I'm looking for answers "in your own words" (vs., taking answers from exercise questions, slides, etc.). For that reason, I expect everyone's answers to be "unique" (i.e., not resembling someone else's answers), but they also must be accurate and precise.
+
+Some of the topics include (but not limited to):
+O  Good tables vs. bad tables
+O  Design process
+O  BCNF
+O  3NF
+O  LLJD (Lossless Join Decomposition)
+O  Dependency Preservation
+O  Various types of keys: Super keys, Candidate keys, Primary keys, Foreign keys
+O  Decomposition
+O  Armstrong’s Axioms + additional axioms derived from Armstrong's Axioms (including proofs, as in the exercise questions)
+O  Functional Dependencies
+O  Closure of Attribute Sets
+O  Set vs. Multi-Set
+O  Entity sets, Relationship sets
+O  Relation, Domain, Atomic Domain
+O  Cartesian Product vs. Joins
+O  Various Join types
+O  Derived Relations/Tables
+O  WITH, VIEWS
+X  Nested Sub-Queries
+O  DDL (e.g., domain constraints, check clause, referential integrity)
+
+/home/ddauphin/srsRAN/srsRAN/srsue/src/stack/rrc_nr/rrc_nr.cc
+Line 619
+Offset 74-76

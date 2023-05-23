@@ -1,0 +1,44 @@
+<!-- 
+A header tag, with an h1 naming your site, with a title for your page. 
+A footer with your name, student ID, and any other info about yourself you wish to include
+A single div with an id of results.  
+Your page will have a form with the following:
+
+A label with a for attribute referencing your input
+A textarea element with a name and id of text_input
+A button to submit the form
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+    <meta charset="utf-8">
+    <title>Name of My Glorious Site!</title>
+    <link rel="stylesheet" href="../public/css/main.css">
+ </head>
+ 
+ <body>
+    <header>
+        <h1>Name of My Glorious Site!</h1>
+    </header>
+    <div id="error" class="error" hidden>Div for rendering hidden errors!</div>
+    
+    <form id="main_form">
+        <label for="text_input">Enter Text:</label>
+        <textarea name="text_input" id="text_input"></textarea>
+        <input type="Submit">
+    </form>
+
+    <div id="results"></div>
+
+    <script src="../public/js/main.js"></script>
+    
+    <footer>
+      <p id="Name">Harris Spahic</p>
+      <p id="Student_Id">10460436</p>
+      <p id="Alias">Harry Potter</p>
+   </footer>
+</body>
+ 
+ 
+</html>

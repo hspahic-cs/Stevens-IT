@@ -1,0 +1,39 @@
+/*
+You will style your page using at least 5 CSS selectors for general CSS styling. You will place the CSS in its own file. 
+*/
+
+h1 {
+    font-weight: bolder;
+    text-align: center;
+    size: 60px;
+    background-color: bisque;
+    width: 100%;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+}
+
+dt {
+    font-weight: bold;
+    size: 20px;
+    text-align: left;
+}
+
+dd {
+    size: 12px;
+    text-align: center;
+}
+
+footer {
+    position: relative;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: bisque;
+    color: black;
+    text-align: center;
+    font-weight: bolder;
+    font-size: 18px
+}

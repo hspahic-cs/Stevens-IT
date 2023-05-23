@@ -1,0 +1,46 @@
+/*This file should have CSS rulesets */
+
+h1{
+    color: salmon;
+    background: grey;
+    font-size: 30px;
+}
+
+p{
+    height: auto;
+    font-size: 16px;
+    float: right;
+}
+
+#venueInput{
+    background-color: lightgrey;
+}
+
+label{
+    color:salmon;
+}
+
+main{
+    margin: auto;
+    width: 50%;
+    border: 3px solid grey;
+    padding: 10px;
+}
+
+#homepage-link{
+    font-size: 20;
+    color: salmon;
+    background-color: lightgrey;
+}
+
+p.not-found{
+    font-size: 10;
+    font-style: bolder;
+}
+
+div{
+    margin: auto;
+    width: 90%;
+    border: 3px solid grey;
+    padding: 10px;
+}

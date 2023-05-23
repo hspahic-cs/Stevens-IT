@@ -1,0 +1,29 @@
+Simple BCNF normalization
+
+
+A -> BC 
+AD -> EFG
+C -> K
+
+SLIDES TO KNOW
+7.30
+7.31
+7.32
+7.47 practice
+7.48
+7.57
+
+ALGO for 7.32 -> F -> F+ using CAS
+I. Generate all possible LHS
+II. Compute all possible LHS from (I)
+    i.e compute (a)+ (=> (LHS)+ )
+III. Generate all possible pairs of LHS & RHS
+
+
+Result -> compute all possible RHS
+
+(R1 intersect R2) -> R1
+OR 
+(R2 intersect R1) -> R2
+
+

@@ -1,0 +1,90 @@
+For loop with n = 1 -> Inf
+Direct Calc with n = 1 -> Inf
+
+For loop with n = 2 -> 1
+Direct Calc with n = 2 -> 1
+
+For loop with n = 3 -> 2
+Direct Calc with n = 3 -> 2
+
+For loop with n = 4 -> 1.5
+Direct Calc with n = 4 -> 1.5
+
+For loop with n = 5 -> 1.6667
+Direct Calc with n = 5 -> 1.6667
+
+For loop with n = 6 -> 1.6
+Direct Calc with n = 6 -> 1.6
+
+For loop with n = 7 -> 1.625
+Direct Calc with n = 7 -> 1.625
+
+For loop with n = 8 -> 1.6154
+Direct Calc with n = 8 -> 1.6154
+
+For loop with n = 9 -> 1.619
+Direct Calc with n = 9 -> 1.619
+
+For loop with n = 10 -> 1.6176
+Direct Calc with n = 10 -> 1.6176
+
+For loop with n = 11 -> 1.6182
+Direct Calc with n = 11 -> 1.6182
+
+For loop with n = 12 -> 1.618
+Direct Calc with n = 12 -> 1.618
+
+For loop with n = 13 -> 1.6181
+Direct Calc with n = 13 -> 1.6181
+
+For loop with n = 14 -> 1.618
+Direct Calc with n = 14 -> 1.618
+
+For loop with n = 15 -> 1.618
+Direct Calc with n = 15 -> 1.618
+
+For loop with n = 16 -> 1.618
+Direct Calc with n = 16 -> 1.618
+
+For loop with n = 17 -> 1.618
+Direct Calc with n = 17 -> 1.618
+
+For loop with n = 18 -> 1.618
+Direct Calc with n = 18 -> 1.618
+
+For loop with n = 19 -> 1.618
+Direct Calc with n = 19 -> 1.618
+
+For loop with n = 20 -> 1.618
+Direct Calc with n = 20 -> 1.618
+
+For loop with n = 21 -> 1.618
+Direct Calc with n = 21 -> 1.618
+
+For loop with n = 22 -> 1.618
+Direct Calc with n = 22 -> 1.618
+
+For loop with n = 23 -> 1.618
+Direct Calc with n = 23 -> 1.618
+
+For loop with n = 24 -> 1.618
+Direct Calc with n = 24 -> 1.618
+
+For loop with n = 25 -> 1.618
+Direct Calc with n = 25 -> 1.618
+
+For loop with n = 26 -> 1.618
+Direct Calc with n = 26 -> 1.618
+
+For loop with n = 27 -> 1.618
+Direct Calc with n = 27 -> 1.618
+
+For loop with n = 28 -> 1.618
+Direct Calc with n = 28 -> 1.618
+
+For loop with n = 29 -> 1.618
+Direct Calc with n = 29 -> 1.618
+
+For loop with n = 30 -> 1.618
+Direct Calc with n = 30 -> 1.618
+

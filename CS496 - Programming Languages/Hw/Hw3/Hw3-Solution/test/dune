@@ -1,0 +1,8 @@
+(test
+ (name test)
+ (libraries ounit proc))
+
+(env
+ (dev
+  (flags
+   (:standard -warn-error -A))))

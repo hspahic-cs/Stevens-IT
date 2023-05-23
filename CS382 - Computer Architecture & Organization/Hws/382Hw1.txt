@@ -1,0 +1,198 @@
+'''
+CS 382 Hw1
+Name: Harris Spahic
+Pledge: I Pledge My Honor I Have Abided By The Steven's Honor System
+'''
+
+#-------------------------------------------------------
+#Problem 1
+
+#Part A:
+CompStats = {"P1":(3.2*10^9, 1.5),
+             "P2":(2.0*10^9, 1.0),
+             "P3":(4.0*10^9, 2.3)}
+            (Name, CyclesPerSecond, CPI)
+
+Performance = CyclesPerSecond / CyclesPerInstruction --> InstructionsPerSecond
+PerformanceP1 = 3.2*10^9 / 1.5 = 2.13 * 10^9
+PerformanceP2 = 2.0*10^9 / 1.0 = 2.0 * 10^9
+PerformanceP3 = 4.0*10^9 / 2.3 = 1.74 * 10^9
+
+#Part B:
+InstructionsP1 = PerformanceP1 * time = 2.13 * 10^10
+NumCyclesP1 = CyclesPerSecondP1 * time = 3.2 * 10^10
+
+InstructionsP2 = PerformanceP2 * time = 2.0 * 10^10
+NumCyclesP2 = CyclesPerSecondP2 * time = 2.0 * 10^10
+
+InstructionsP3 = PerformanceP3 * time = 1.74 * 10^10
+NumCyclesP3  = CyclesPerSecondP3 * time = 4.0 * 10^10
+
+#Part C:
+CPUTime = (I * CPI) / CyclesPerSecond
+CPUTime * 0.7 = (I * CPI * 1.2) / (k * CyclesPerSecond)
+k = 1.2 / 0.7 --> 1.71
+CyclesPerSecondP2 * 1.71 = 3.42*10^9 or 3.42 GHz
+
+#-----------------------------------------------------------
+#Problem 2
+
+#Part A:
+CompStats2 = {"P1":(2.5*10^9, 1, 2, 3, 3),
+              "P2":(3.0*10^9, 2, 2, 2, 2),
+              "%" :(0,      ,.3,.2,.3,.2)}
+
+CPI_P1 = 1 * .3 + 2 * .2 + 3 * .5 = 2.2
+CPI_P2 = 2 * (.3 + .2 + .3 + .2) = 2
+
+#Part B:
+I = NumInstructions = 1.06 * 10^6
+ClockCyclesP1 = NumInstructions * CPI_P1 = 1.06*10^6 * 2.2
+ClockCyclesP2 = NumInstructions * CPI_P2 = 1.06*10^6 * 2.0
+
+#Part C:
+CPUTimeP1 = (I * CPI_P1) / CyclesPerSecondP1 = (I * 2.2) / (2.5 * 10^9)
+CPUTimeP2 = (I * CPI_P2) / CyclesPerSecondP2 = (I * 2.0) / (3.0 * 10^9)
+Setting the two equal to each other:
+(2.2 / 2.5) > (2.0 / 3.0)
+
+CPUTimeP2 is Less. Thus P2 is faster.
+
+#-------------------------------------------------------------
+#Probelm 3
+
+#Part A:
+CompStats3 = {"C1":(1.0*10^9, 1.2),
+              "C2":(1.2*10^9, 1.5)}
+
+SecondsPerCycle = 1.0 * 10^-9
+CPI_C1 = ((1 / SecondsPerCycle) * ExecutionTimeC1)/ NumInstructionsC1
+       = ((1.0 * 10 ^ 9) * 1.2) / (1.0 * 10 ^ 9)
+       = 1.2
+
+CPI_C2 = ((1 / SecondsPerCycle) * ExecutionTimeC2)/ NumInstructionsC1
+       = ((1.0 * 10 ^ 9) * 1.5) / (1.2 * 10 ^ 9)
+       = 1.5 / 1.2 = 1.25
+
+#Part B:
+CPUTimeC1 = CPI_C1 * NumInstructionsC1 / CyclePerSecondC1
+          = (1.2 * 1.0*10^9) / CyclePerSecondC1
+CPUTimeC2 = CPI_C2 * NumInstructionsC2 / CyclePerSecondC2
+          = (1.25 * 1.2*10^9) / CyclePerSecondC2
+
+CPUTimeC1 = CPUTimeC2
+(1.2 * 1.0*10^9) / CyclesPerSecondC1 = (1.25 * 1.2*10^9) / CyclesPerSecondC2
+CyclesPerSecondC2 / CyclesPerSecondC1 = 1.25
+
+Thus C2's clock is 1.25's faster than C1's Clock
+
+#Part C:
+CPUTimeP3 = CPI_P3 * NumInstructionsP3 / CyclesPerSecondP3
+          = (1.1 * (0.6 * 10^9)) / (1.0 * 10^9)
+          = 0.66
+
+Compared to CPUTimeC1 = 1.2 --> 1.2 / 0.66 --> C3 is 1.818 times faster than C1
+Compared to CPUTimeC2 = 1.25 * 1.2 = 1.5 --> 1.5 / 0.66 --> C3 is 2.272 times faster than C2
+
+#----------------------------------------------------------------------------------------
+#Problem 4
+
+#Part A:
+WaferStats = {"W1":(15cm, 12$, 84 , 0.022),
+              "W2":(20cm, 15$, 100, 0.031)}
+
+DieAreaW1 = (7.5^2 * 3.14) / 84 = 2.1cm^2
+DieAreaW2 = (10^2 * 3.14) / 100 = 3.14cm^2
+
+
+YieldW1 = 1 / (1 + (DefectsPerAreaW1 * DieAreaW1 / 2)) ^ 2
+        = 1 / (1 + (0.022 * (2.1) / 2))^2
+        = .955
+
+YieldW2 = 1 / (1 + (DefectsPerAreaW2 * DieAreaW2 / 2)) ^ 2
+        = 1 / (1 + (0.031 * (3.14) / 2))^2
+        = .909
+
+#Part B:
+CostPerDieW1 = Cost / (NumDiesW1 * YieldW1)
+             = 12 / (84 * .955)
+             = 0.1496$
+
+CostPerDieW2 = Cost / (NumDiesW2 * YieldW2)
+             = 15 / (100 * .909)
+             = 0.1650$
+
+#Part C:
+NumDiesW1 = 84 * 1.10 = 92.4
+NumDiesW2 = 100 * 1.10 = 110
+
+DPAW1 = 0.022 * 1.15 = 0.0253
+DPAW2 = 0.031 * 1.15 = 0.0357
+
+DieAreaW1 = (7.5^2 * 3.14) / 92.4 = 1.912cm^2
+DieAreaW1 = (10^2 * 3.14) / 110 = 2.85cm^2
+
+YieldW1 = 1 / (1 + (DefectsPerAreaW1 * DieAreaW1 / 2))^2
+        = 1 / (1 + (DPAW1 * 1.61 / 2 )) ^ 2
+        = 0.953
+
+YieldW2 = 1 / (1 + (DefectsPerAreaW2 * DieAreaW2 / 2))^2
+        = 1 / (1 + (0.0357 * 2.85 / 2 )) ^ 2
+        = 0.9055
+
+#-----------------------------------------------------------------------------
+#Problem 5
+
+#Part 1:
+prgmStats = {"FP":  (50x10^6, 2),
+             "INT": (100x10^6, 2),
+             "L/S": (80x10^6, 4),
+             "B":   (16x10^6, 8)}
+
+CyclesPerSecond = 2.0*10^9
+PercentFP  = 50  / 246 = 0.203
+PercentINT = 100 / 246 = 0.407
+PercentLS  = 80  / 246 = 0.325
+PercentB   = 16  / 246 = 0.065
+
+CPUTime = (I * CPI) / CyclesPerSecond
+        = (I * (0.203 * 2 + 0.407 * 2 + 0.325 * 4 + 0.065 * 8)) / CyclesPerSecond
+        = (I * 3.04) / CyclesPerSecond
+
+CPUTime' = (I * CPI) / CyclesPerSecond
+         = (I * (0.6 * (0.203 * 2 + 0.407 * 2) + 0.7 * (0.325 * 4 + 0.065 * 8))) / CyclesPerSecond
+         = (I * (2.006)) / CyclesPerSecond
+
+Then we execute CPUTime / CPUTime' = 3.04 / 2.06 = 1.515 times faster
+
+#Part B:
+CPUTime = (I * 3.04) / CyclesPerSecond
+
+CPUTime' = 0.95 * CPUTime = (I * 2.888) / CyclesPerSecond
+
+#Solve for new CPI
+2.888 = PercentFP * CPI_FP' + PercentINT * CPI_INT + PercentLS * CPI_LS + PercentB * CPI_B
+      = 0.203 * CPI_FP' + 0.407 * 2 + 0.325 * 4 + 0.065 * 8
+
+CPI_FP' = (2.88 - (0.407 * 2 + 0.325 * 4 + 0.065 * 8)) / (0.203)
+        = 1.212
+
+CPI_FP / CPI_FP' = 2 / 1.212 = 1.65
+
+Then we must improve by a reduction of 1.65 times in order to make our program run 5% faster
+
+#Part C:
+CPUTime = (I * 3.04) / CyclesPerSecond
+
+CPUTime' = 0.7 * CPUTime = (I * 2.128) / CyclesPerSecond
+
+
+2.128 = PercentFP * CPI_FP + PercentINT * CPI_INT + PercentLS * CPI_LS' + PercentB * CPI_B
+      = 0.203 * 2 + 0.407 * 2 + 0.325 * CPI_LS' + 0.065 * 8
+
+CPI_LS' = (2.128 - (0.203 * 2 + 0.407 * 2 + 0.065 * 8)) / (0.325)
+        = 1.194
+
+CPI_LS / CPI_LS' = 4 / 1.194 = 3.35
+
+Then we must improve CPI_FP by a reduction factor of 3.35 in order to make our program run 5% faster

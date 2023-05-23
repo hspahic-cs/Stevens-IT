@@ -1,0 +1,114 @@
+Name: Harris Spahic
+Date: 10/2/21
+Pledge: I Pledge My Honor I Have Abided By The Steven's Honor System
+
+--------------------------------------------------------------------
+
+Problem #1:
+
+ADD X10, X10, XZR         // X10 = i = 0
+loop: SUBI X12, X10, #12  // X12 = i - 12
+CBZ X12, exit             // X12 = 0 ?
+LDUR X11, [X19, #0]       // X11 = A[0]
+SUB X11, X11, X10         // A[0] = A[0] - i
+STUR X11, [X19, #0]       // A[0] = X11
+ADDI X10, X10, #1         // i++
+ADDI X19, X19, #8         // A* = A* + 8
+B loop
+B exit
+
+--------------------------------------------------------------------
+
+Problem #2:
+// Used registers:
+// X20 = i, X21 = j, X22 = A*, X23 = B*
+
+ADD X9, XZR, XZR
+LSL X1, X20, #3           // X1 = i * 8
+ADD X9, X22, X1           // X9 = A* + X1
+LSL X2, X21, #3           // X2 = j * 8
+ADD X9, X9, X2            // X9 = X9 + X2
+LDUR X10, [X9, #0]        // X10 = A[i + j]
+STUR X10, [X23, #48]      // B[6] = X10
+
+--------------------------------------------------------------------
+
+Problem #3:
+// X19 = a, X20 = b
+// Used registers
+
+SUBS XZR, X19, X20
+B.LT largerB
+ADD X19, X20, X20
+B Exit
+largerB:
+ADD X19, X19, X20
+Exit:
+
+--------------------------------------------------------------------
+
+Problem #4:
+// Used Registers
+// X0 = 0010 0100
+
+Step1:  Compares X0, #20
+        Since X0 = 2^2 + 2^5 = 36 this
+        sets the flag Z to 0 and N to 0
+
+Step2:  B.GE checks the flag to see if the result was greater
+        that is if N = 0
+        Since it is, goes to the else branch
+
+Step3:  LSR right shifts the input (X0) by given number(#2)
+        Right shift by 2 of X0 = 0010 0100 --> 0000 1001
+        This result is stored in X1
+        X1 = 0000 1001 = #9
+
+--------------------------------------------------------------------
+
+Problem #5:
+
+Step1:  Sets X10 to #1
+        Sets X11 to X10 = #1
+
+Step2:  SUBIS sets flags for X11 - #5
+        Since X11 = #1 --> Z = 0, N = 1
+
+Step3:  B.GE cheeks the flag to see if the result was greater
+        that is if N = 0
+        But N = 1 so the call to the branch is skipped
+
+Step4:  Adds 1 to X11
+        Left shifts X10 by 1 (double X10)
+        Calls to loop
+
+Step5:  This loop repeats 4 times to make X11 >= 5
+        That means X10 doubles 4 times, 2^4 = 16
+        The end value of X10 = 0000 1000
+
+--------------------------------------------------------------------
+
+Problem #6:
+
+BL caller
+
+caller:
+SUBI SP, SP, #8
+STUR LR, [SP, #0]
+ADD X20, XZR, XZR
+ADDI X20, X20, #2
+ADD X21, XZR, XZR
+ADDI X20, X20, #3
+ADD X19, XZR, XZR
+BL addition
+LDUR LR, [SP, #0]
+ADDI SP, SP, #8
+BR, LR
+
+addition:
+SUBI SP, SP, #8
+STUR LR, [SP, #0]
+ADD X19, X20, X21
+LDUR LR, [SP, #0]
+ADDI SP, SP, #8
+BR, LR

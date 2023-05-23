@@ -1,0 +1,11 @@
+
+(* Add Last exercise *)
+
+let l1 = { head <= 0; size <= 0} (* 0 in head signals null *)
+in let add_last = (* complete *)
+in begin
+     ((add_last l1) 2);
+     ((add_last l1) 3);
+     ((add_last l1) 4);
+     debug(l1)  (* required inspect the list *)
+   end

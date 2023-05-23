@@ -1,0 +1,6 @@
+letrec rev_helper(l) = proc(l){
+    if empty?(l) then emptylist
+    else cons(rev_helper(tl(l)), hd(l))}
+in let rev = rev_helper(example)
+in let example = cons(1,cons(2,cons(3,emptylist)))
+in (rev example)

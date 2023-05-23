@@ -1,0 +1,111 @@
+Name: Harris Spahic
+Pledge: "I pledge my honor I have abided by the Steven's Honor Code"
+
+Problem #1:
+Effected by branch 0:
+-> CBZ, B
+
+Unaffected by branch 0:
+-> R-type, LDUR, STUR
+
+#1b:
+Effected by ALUSrc 0:
+-> LDUR, STUR
+
+Unaffected by ALUSrc 0:
+-> CBZ, B, R-type
+
+#1c:
+Effected RegWrite 0:
+-> R-type, LDUR
+
+Unaffected by RegWrite 0:
+-> STUR, B, CBZ
+
+Problem #2:
+A few new features would have to be added to our datapath to implement a swap instruction.
+  1. Since swap is the only instruction where we'd need to add a new control which specifies that we are going to write to 2 registers called swap.
+  2. We need to have 2 write registers in our register unit, since we overwrite both swapped values.
+  3. We'd also need two write addresses in our data memory, as well as two read addresses.
+  4. We'll have the swap control instruction specify to skip over the ALU & read immediately from the two inputted addresses into our memory
+  Except we'll have the input signals swap so Rn becomes Address2 & Rm becomes Address2.
+  5. We'll access both addresses normally, then write them to the original order of Rn & Rm.
+
+Problem #3:
+Clock cycle with improvement:
+-> Sum of all latencies = 1300ps
+
+Clock cycle without improvement:
+-> Sum of all latencies = 1100ps
+
+#3b:
+Speedup -> CyclesPerInstruction * Time Per Cycle * #sub_instructions. Let 1 be with improvement, 0 without
+           Speed1 = CPI1 * TPC1 * I0 * 0.8 --> 1 * 1300ps * 0.8 * I0 = 1040 * I0
+           Speed0 = CPI0 * TPC0 * I0 --> 1100ps * I0
+
+           Speed0 / Speed1 = 1100 / 1040 = 1.057 -> 5.7% faster
+
+#3c:
+Slowest new ALU can be & will still improve performance.
+(950ps + ALU time) * 0.8 = 1100ps
+(950ps + ALU time)  = 5500 / 4 = 1375ps
+--> ALU time = 1375ps - 950ps = 425ps
+Thus the ALU time must be strictly less than 425ps to have improvement in performance.
+
+
+Problem #4:
+Pipelined Clock cycle time = longest latency = 300ps
+Non-pipelined clock cycle time = sum of latencies = 1100ps
+
+*#4b:
+Total latency of an instruction --> clock time of instruction regardless of % of commands executed
+--> Pipelined for LDUR has 1500ps latency
+--> Non-pipelined for LDUR has 1100ps latency
+
+#4c:
+Split the stage with the highest latency, i.e the Mem (300ps) instruction.
+This causes the highest latency to become 250ps in the IF stage. Since the highest
+latency is the clock-cycle-time of a pipelined system, our new clock cycle time is 250ps.
+
+Problem #5:
+
+                      Time
+                      ---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+1.LDUR X20,[X19,#0]   IF  ID  EXE MEM WB
+2.LDUR X21,[X19,#8]       IF  ID  EXE MEM WB
+MUST STALL                    NOP NOP NOP NOP NOP
+3.ADD X22, X21, X20               IF  ID  EXE MEM WB  --> 1 pipe (From #2 MEM/WB to ID/EXE)
+4.SUB X23, X23, X22                   IF  ID  EXE MEM WB --> 1 pip (From #3 EXE/MEM to ID/EXE)
+
+
+Problem #6:
+
+1.LDUR X1, [X6, #8]
+MUST STALL
+MUST STALL
+2.ADD X0, X1, X0
+MUST STALL
+MUST STALL
+3.STUR X0, [X10, #4]
+4.LDUR X2, [X6, #12]
+MUST STALL
+MUST STALL
+5.SUB X3, X0, X2
+MUST STALL
+MUST STALL
+6.STUR X3, [X8, #24]
+7.CBZ X2, 40
+
+#6b.
+
+1.LDUR X1, [X6, #8]
+2.LDUR X2, [X6, #12]
+MUST STALL
+3.ADD X0, X1, X0
+MUST STALL
+MUST STALL
+4.SUB X3, X0, X2
+5.STUR X0, [X10, #4]
+MUST STALL
+6.STUR X3, [X8, #24]
+7.CBZ X2, 40

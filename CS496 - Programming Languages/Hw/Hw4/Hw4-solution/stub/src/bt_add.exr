@@ -1,0 +1,38 @@
+
+(* Add exercise 3 *)
+
+let n_left = { data <= 12; left <= 0; right <= 0}    (* 0 in head signals null *)
+in let n_right = { data <= 44; left <= 0; right <= 0}
+in let n_root = { data <= 33; left <= n_left ; right <= n_right }
+in let t1 = { root <= n_root ; size <= 3} 
+in let v = newref(0)
+in let x = newref(0)
+in let descend = proc (node){ 
+  if deref(v) = node.data
+  then node
+  else (
+    if deref(v) > node.data
+    then node.right
+    else node.left )}
+in letrec add_bt_helper (node) =(
+  let x = (descend node) in
+  if number?(x)
+  then(
+    if deref(v) > node.data
+    then node.right <= {data <= deref(v); left <= 0; right <= 0}
+    else node.left <= {data <= deref(v); left <= 0; right <= 0})
+  else(
+    if x.data = node.data
+    then 0
+    else (add_bt_helper x))
+  )
+in let add_bt = proc(t) {proc(v1){
+  (begin
+    setref(v, v1);
+    (add_bt_helper t.root)
+  end)}} 
+in begin
+     ((add_bt t1) 23);
+     t1.size <= t1.size+1;
+     debug(t1)		
+   end 

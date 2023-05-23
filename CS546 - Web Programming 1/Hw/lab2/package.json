@@ -1,0 +1,13 @@
+{
+  "name": "cs-546-lab-2",
+  "version": "1.0.0",
+  "description": "And so it begins...",
+  "main": "app.js",
+  "type":"module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "Harris Spahic 10460436",
+  "license": "ISC"
+}

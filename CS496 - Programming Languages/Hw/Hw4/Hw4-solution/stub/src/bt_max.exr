@@ -1,0 +1,26 @@
+
+(* Max exercise *)
+
+let n_left = { data <= 12; left <= 0; right <= 0}    (* 0 in head signals null *)
+in let n_right = { data <= 44; left <= 0; right <= 0}
+in let n_root = { data <= 33; left <= n_left ; right <= n_right }
+in let t1 = { root <= n_root ; size <= 3}  
+in let max = newref(0)
+in letrec max_bt_helper (node) =
+    if number?(node)
+    then deref(max)
+    else 
+        (if node.data > deref(max)
+        then 
+            begin 
+                setref(max, node.data);
+                (max_bt_helper node.left);
+                (max_bt_helper node.right)
+            end
+        else 
+            begin 
+                (max_bt_helper node.left);
+                (max_bt_helper node.right)
+            end)
+in let max_bt = proc (x) {(max_bt_helper t1.root)}
+in (max_bt t1)

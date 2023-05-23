@@ -1,0 +1,48 @@
+{{!--
+
+registration handelbars
+
+--}}
+<h1>Registration</h1>
+
+<main>
+    <form action="/register" id="registration-form" method="POST">
+        <label for="firstNameInput">
+            Input for first name
+            <input type="text" name="firstNameInput" id="firstNameInput"> 
+        </label>
+        <label for="lastNameInput">
+            Input for last name
+            <input type="text" name="lastNameInput" id="lastNameInput">
+        </label>
+        <label for="emailAddressInput">
+            Input for email address
+            <input type="email" name="emailAddressInput" id="emailAddressInput">
+        </label>
+        <label for="passwordInput">
+            Input for password
+            <input type="password" name="passwordInput" id="passwordInput">
+        </label>
+        <label for="confirmPasswordInput">
+            Input for password confirmation
+            <input type="password" name="confirmPasswordInput" id="confirmPasswordInput">
+        </label>
+        <label for="roleInput">
+            Dropdown for role input: admin or user
+            <select id="roleInput" name="roleInput">
+                <option value="user">User</option>
+                <option value="admin">Admin</option>
+            </select>
+        </label>
+
+        <input type="submit" value="Submit!">
+    </form>
+    <div id="reg-form-error" class="error" hidden>Div for renderering form errors!</div>
+
+    {{#if Error}}
+    <p class="error">{{Error}}</p>
+    {{/if}}
+
+    <a href="/login">Already have an account? Click here to log-in</a>
+</main>
+<script src="../public/js/lab10.js"></script>

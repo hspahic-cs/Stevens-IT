@@ -1,0 +1,157 @@
+Name: Harris Spahic
+Date: Dec 3rd, 2021
+Pledge: "I pledge my honor I have abided by the Stevens Honor System."
+
+----------------------------------------------------------------------
+#1: Variables with "Temporal Locality"
+--> i, j, n, m
+Exhibit temporal locality since i & j have to be incremented repeatedly &
+used to reference the elements in the array. Also n & m, since they are stored
+in some address and will need to be compared against i & j repeatedly.
+
+--> Anew[j][i], err
+Exhibit temporal locality since they will need to be referenced more than once
+each iteration of the loop.
+
+--> A[j][i] & A[j][i+1]
+Exhibit temporal locality
+
+When the first iterates, we reference
+A[j][0], A[j][1], and A[j][2].
+Then we iterate i by one immediately after and reference
+A[j][1], A[j][2], and A[j][3]
+
+But we already recently accessed A[j][1] & A[j][2] in the previous iteration,
+thus A[j][i] & A[j][i+1] Exhibit temporal locality.
+
+1b. Variables with "Spatial Locality"
+--> A[j][i], A[j-1][i], A[j+1][i]
+Since the rows are referenced contiguously, every-time we reference a row
+we have access to all the elements in its column. Thus each row referenced
+exhibits spatial locality.
+
+1c. Our program would be significantly slower because how we currently iterate
+has us going through each row, then every column in that row. Since all the columns
+exist in the same memory location as the row, referencing them is fast.
+
+However, if we were to flip our loops and go through each column then each row,
+for every ith column we'd have to reference every single memory address in our array
+for their rows. Which would be significantly slower.
+
+----------------------------------------------------------------------
+#2:
+For 16 direct mapped 1-word blocks -->  Tag = 4 | Index = 4 | Offset = 0
+
+Let A & B be the corresponding binary string representing the first & second
+part of each hex-address respectively. Since Index & Tag are both 4 bits,
+A is the "Tag" & B is the "Index" for each hex-address.
+
+Since there are no repeat addresses, and we're using direct mapping all
+these hex-addresses are misses.
+
+         A    B
+0x43 --> 0100 0011
+0xc4 --> 1100 0100
+0x2b --> 0010 1011
+0x42 --> 0100 0010
+0xc5 --> 1100 0101
+0x28 --> 0010 1000
+0xbe --> 1011 1110
+0x05 --> 0000 0101
+0x92 --> 1001 0010
+0x2a --> 0010 1010
+0xba --> 1011 1010
+0xbd --> 1011 1101
+
+#2b.
+For 8, 2-word blocks --> Tag = 4 | Index = 3 | Offset = 1
+
+We subdivide the binary address of each hex-address' binary address into
+A, B & C where A is the "Tag", B is the "Index" and C is the "Offset".
+
+         A    B   C
+0x43 --> 0100 001 1 | Miss
+0xc4 --> 1100 010 0 | Miss
+0x2b --> 0010 101 1 | Miss
+0x42 --> 0100 001 0 | Hit (line 0)
+0xc5 --> 1100 010 1 | Hit (line 1)
+0x28 --> 0010 100 0 | Miss
+0xbe --> 1011 111 0 | Miss
+0x05 --> 0000 010 1 | Miss
+0x92 --> 1001 001 0 | Miss
+0x2a --> 0010 101 0 | Hit (line 3)
+0xba --> 1011 101 0 | Miss
+0xbd --> 1011 110 1 | Miss
+
+-----------------------------------------------------------------------
+#3:
+
+CPI = 1 --> #Instructions = #ClockCycles
+
+We want to minimize the miss portion of AMAT, since the average memory access time is constant for hits.
+We'll also ignore multiplication for any constants like # number instructions & reference per Instructions
+because they are the same for each blocksize.
+
+This is equal to, AMATmiss = MissRate * MissPentalty
+                           = %B * (30 * B)
+
+Notice blocksizes only double. Then in order for B * B% to decrease as B doubles
+the miss rate must continuously decrease by a factor more than two. In order to
+minimize B * B% then, we choose the smallest blocksize B = 8.
+
+
+#3b.
+
+AMATmiss = MissRate * MissLatency = MissRate * MissPentalty
+                                  = %B * (24 + B)
+
+-> B = 8  ==> 0.05 * 32 = 1.6
+-> B = 16 ==> 0.03 * 40 = 1.2
+-> B = 32 ==> 0.02 * 56 = 1.12
+-> B = 64 ==> 0.015 * 64 = 1.32
+-> B = 128 ==> 0.011 * 128 = 1.672
+
+Thus B = 32 is the optimal block size.
+
+#3c. If miss latency is constant, then the instruct with the lowest MissRate (B = 128 with 1.1%)
+will be the optimal block size.
+
+-----------------------------------------------------------------------
+Since architecture is 64 bit memory with byte addressing,
+FOR ALL THESE PROBLEMS, BITS ARE ORDERED in Tag, Index & Offset respectively.
+
+#4: 512 direct mapped 1 word blocks --> Tag = 64 - 9 - 2 = 53 | Index = 9 | Offset = 2 (1-word)
+
+#4b. 64 direct mapped 8 word blocks --> Tag = 64 - 6 - 5 = 53 | Index = 6 | Offset = 5
+
+#4c. 4 bytes per word * 8 bits per word / 64 = 32 / 64 = 0.5 for 4A
+     4 bytes per word * 8 bits per words * 8 words / 64 = 256 / 64 = 4 for 4B
+
+#4d. 512 words for a two way set associative 1-word blocks  --> Tag = 54 | Index = 8 | Offset = 2(1-word)
+512 words / 2-way set associative = 256 = 2^8 = index
+
+------------------------------------------------------------------------
+#5:
+
+Convert Data to address:
+
+16 4 way-set associative one-word blocks --> Tag = 12 - 2 - 2 = 8 | Index = 2 | Offset = 2
+
+A, B, C --> Tag, Index, Offset
+
+         A        B  C
+0x143 -> 00010100 00 11  | X
+0xc4a -> 11000100 10 10  | X
+0x22b -> 00100010 10 11  | X
+0x42f -> 01000010 11 11  | X
+0x492 -> 01001001 00 10  | X
+0x2a2 -> 00101010 00 10  | X
+0x3ba -> 00111011 10 10  | X
+0xb2d -> 10110010 11 01  | X
+
+Index |  V  |    Tag     |    Data    |    Tag     |    Data    |    Tag     |    Data    |    Tag     |    Data    |
+------|-----|------------|------------|------------|------------|------------|------------|------------|------------|
+  00  |  Y  |  00010100  | MEM(0x143) |  01001001  | MEM(0x492) |  00101010  | MEM(0x2a2) |  --------  | MEM(     ) |
+  01  |  N  |  --------  | MEM(     ) |  --------  | MEM(     ) |  --------  | MEM(     ) |  --------  | MEM(     ) |
+  10  |  Y  |  11000100  | MEM(0xc4a) |  00100010  | MEM(0x22b) |  00111011  | MEM(0x3ba) |  --------  | MEM(     ) |
+  11  |  Y  |  01000010  | MEM(0x42f) |  10110010  | MEM(0xb2d) |  --------  | MEM(     ) |  --------  | MEM(     ) |

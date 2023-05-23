@@ -1,0 +1,28 @@
+{{!--
+
+login form handlebar template
+
+--}}
+
+<h1> Login Page </h1>
+
+<main>
+    <form action="/login" id="login-form" method="POST">
+        <label for="emailAddressInput"> Form to enter Email </label>
+        <input type="email" name="emailAddressInput" id="emailAddressInput">
+
+        <label for="passwordInput"> Form to enter Password </label>
+        <input type="password" name="passwordInput" id="passwordInput">
+        
+        <input type="submit" value="Submit!">
+    </form>
+
+    {{#if Error}}
+    <p class="error">{{Error}}</p>
+    {{/if}}
+
+    <a href="/register">Click here to register!</a>
+</main>
+
+<div id="login-form-error" class="error" hidden>Div for renderering form errors!</div>
+<script src="../public/js/lab10.js"></script>

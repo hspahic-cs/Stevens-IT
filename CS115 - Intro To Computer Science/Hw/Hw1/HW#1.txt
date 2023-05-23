@@ -1,0 +1,27 @@
+========================
+ PLEDGE ~ Harris Spahic
+========================
+
+"I pledge my honor that I have abided by the Stevens Honor System."
+
+===============
+   SOLUTION:
+===============
+
+0 x*** -> N 0
+0 N*** -> x 1
+
+1 ***x -> S 1
+1 *ExS -> W 0
+1 *xWS -> E 0
+1 *EWS -> N 2
+
+2 *x** -> E 2
+2 *E** -> x 3
+
+3 **x* -> W 3
+3 x*WS -> N 2
+3 N*Wx -> E 4
+3 N*WS -> E 4
+
+4 **** -> N 2

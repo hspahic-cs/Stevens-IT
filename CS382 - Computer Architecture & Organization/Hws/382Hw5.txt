@@ -1,0 +1,139 @@
+Name: Harris Spahic
+Date: 12/8/21
+Pledge: "I pledge my honor I have abided by the Steven's Honor System."
+
+#1:
+
+A)  for (j=0; j<100; j++)
+      c[j] = a[j] * b[j];
+
+We are accessing 3 double-precision values in our main memory (c[j] with stur & a[j], b[j] with load).
+Each value has a size of 8 bytes (64 bits), thus 3 * 8 = 24 bytes in all.
+We have 1 operation (multiplication or *) thus
+
+Arithmetic Intensity = 1 / 24 bytes = 1/24
+
+B)
+for (j=0; j<100; j++)
+  a[j] = a[j] * b[j];
+
+Here even though we are referencing the same address a[j] we must call both retrieval & store, our
+number of reference bytes remains the same as 1A.
+We still have only 1 operation, thus
+
+Arithmetic Intensity = 1 / 24 bytes = 1 / 24
+
+C)
+for (j=0; j<100; j++)
+  c[j] = 4.2 * b[j];
+
+Since we're referencing only two addresses, we have 16 bytes referenced.
+Since we still perform only 1 operation, even if its on a constant double,
+we have
+
+Arithmetic Intensity = 1 / 16 bytes = 1 / 16
+
+D)
+for (j=0; j<100; j++)
+  d[j] = a[j] * b[j] + c[j];
+
+We are referencing 4 addresses (a[j],b[j],c[j] with ldur & d[j] with stur) each of size 8 bytes.
+We have 2 operations (add & multiplication), thus
+
+Arithmetic Intensity = 2 / 32 = 1 / 16
+
+Notice this is the same value as B & C.
+
+E)
+for (j=0; j<100; j++)
+  a[j] = a[j] * b[j] + b[j];
+
+We are referencing  address (a[j], b[j] with ldur and a[j] with stur) each with a size of 8 bytes.
+We have two operations (add & multiplication), thus
+
+Arithmetic Intensity = 2 / 24 = 1 / 12
+
+Half of B & C.
+
+#2:
+2.5 GHz with 8 SIMD processers, each with 32 single-precision FP units
+Supported by 112GB/s off chip memory.
+
+2.5 GHz * 8 SIMD processors * 32 FP units = 640 GFLOP/s
+
+2b)
+
+We are referencing 3 FP values (Stur for Z[i] & Ldur for X[i], Y[i]) & using 2 operations on them
+(multiplication & add).
+
+Thus for each call of SAXPY we have an Arithmetic Intensity of
+= 2 / 12 bytes = 1 / 6 --> FLOP / 6 bytes
+--> each SAXPY call references 6 bytes / FLOP
+--> since our GPU runs 640 GFLOP/s
+
+6 bytes / FLOP * 640 GFLOPS / s = 3840 GBytes /s >> 112GB/s supported off the chip .
+
+Thus the throughput is not sustainable.
+
+#3:
+We know speedup is equal to:
+speedup = 1 / ((1 - F_parallelizable) + (F_parallelizable / 2000)) = 100
+        -> 1 / 100 = (1 - F) + F / 2000
+        -> 20 = 2000(1 - F) + F
+        -> -1980 = -1999F
+        -> 1980 / 1999 x 100 = 99.049524762% = F_parallelizable
+
+This implies (1 - F_parallelizable) x 100 = (1 - 0.99049524762) x 100
+              = 0.950475237% = F_sequential
+
+#4:
+Total bandwidth = Number of links per node * bandwidth per node
+
+For Graph 1:
+Each node has two links, thus
+--> 16 * 1 Gbit/s = 16 Gbit/s
+
+For Graph 2:
+Each corner node has two links. Each edge node has 3 links. And each center node
+has 4 links. That is
+
+Corner: 4 * 2 * Gbit/s
+Edge:   8 * 3 * Gbit/s
+Center: 4 * 4 * Gbit/s
+=======================
+        8 + 24 + 16 = 48 / 2 = 24 Gbit/s
+
+
+For Graph 3:
+
+16 nodes * 15 connections per node = 240 Gbit/s / 2 = 120 Gbit/s
+
+4b):
+Minimum bisection width is the minimum number of connections necessary
+to bisect a graph. Thus the minimum bisection bandwidth is MBW * B
+
+For Graph 1:
+MBW for a ring is 2.
+--> MBBW = 2 * 1Gbit/s = 2Gbit/s
+
+For Graph 2:
+MBW for a 2D mesh is n^1/2 = 4.
+--> MBBW = 4 * 1Gbit/s = 4Gbit/s
+
+For Graph 3:
+MBW for a fully connected graph is (n/2)^2 = 8^2 = 64
+--> MMBW = 64 * 1Gbit/s = 64Gbit/s
+
+4c)
+
+For Graph 1:
+We can remove 1 link due to wrap around.
+
+For Graph 2:
+If two links break on an corner we wont be able to reach that node.
+Thus 2 links.
+
+For Graph 3:
+One node must connect to all others = 15 links
+Thus we can lose 1 less than that number if a single node is to lose all its links.
+Hence 14 links can be lost.

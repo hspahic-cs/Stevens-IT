@@ -1,0 +1,23 @@
+
+(* Example 2 *)
+
+let l1 = { head <= 0; size <= 0}
+in let add_front = proc (x) { proc (l) {
+   	      begin
+	         l.head <={ data <=x; next <= l.head };
+		 l.size <= l.size+1
+end } }
+in letrec bump_helper (node) =
+   if number?(node)
+   then 0
+   else (begin
+          node.data <= node.data + 1;
+	  (bump_helper node.next)
+	end)
+in let bump = proc (ll) { (bump_helper ll.head) }
+in begin
+     ((add_front 2) l1);
+     ((add_front 3) l1);
+     (bump l1); 
+     debug(l1)
+   end

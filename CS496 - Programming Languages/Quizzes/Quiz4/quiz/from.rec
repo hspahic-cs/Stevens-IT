@@ -1,0 +1,8 @@
+letrec take(n) = proc(l){
+  if zero?(n) 
+  then emptylist
+  else (if empty?(l) 
+            then emptylist 
+            else cons(hd(l), ((take (n-1)) tl(l))))}
+in let example = cons(1,cons(2,cons(3,cons(4,emptylist))))
+in ((take 2) example)
